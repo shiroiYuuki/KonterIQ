@@ -1,0 +1,6 @@
+{
+  "name": "KonterIQ",
+  "description": "Smart Business Dashboard for Local Mobile Phone Shops (Konter HP) to monitor sales, inventory, and insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

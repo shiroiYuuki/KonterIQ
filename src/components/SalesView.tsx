@@ -357,7 +357,7 @@ export const SalesView: React.FC = () => {
                         {filteredSales.map((s) => {
                           const saleDateObj = new Date(s.timestamp);
                           const formattedTime = saleDateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-                          const isToday = s.date === '2026-07-04';
+                          const isToday = s.date === new Date().toISOString().split('T')[0];
 
                           return (
                             <tr key={s.id} className="hover:bg-slate-50/40 dark:hover:bg-slate-800/10 transition-colors">

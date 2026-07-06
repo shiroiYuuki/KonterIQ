@@ -41,10 +41,11 @@ export const DashboardView: React.FC = () => {
     addToast 
   } = useApp();
 
-  // --- Date reference ---
-  const todayStr = '2026-07-04'; // Static reference aligned with current time
-  const currentMonth = 6; // July is index 6
-  const currentYear = 2026;
+  // --- Dynamic Calculations based on Current Date ---
+  const todayStr = new Date().toISOString().split('T')[0];
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
 
   // --- Dynamic calculations ---
   const todaySales = sales.filter(s => s.date === todayStr);
@@ -101,8 +102,9 @@ export const DashboardView: React.FC = () => {
       score -= 20; // No sales
     }
 
-    // Target completion pace (July 4th out of 31st is ~13% through month)
-    const elapsedPace = 4 / 31;
+    // Target completion pace (current day of the month divided by total days in the month)
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const elapsedPace = now.getDate() / (daysInMonth || 30);
     const targetPaceRevenue = settings.monthlyRevenueTarget * elapsedPace;
     if (currentMonthRevenue < targetPaceRevenue * 0.7) {
       score -= 10; // Behind revenue targets

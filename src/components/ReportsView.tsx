@@ -27,9 +27,11 @@ export const ReportsView: React.FC = () => {
   const [period, setPeriod] = useState<ReportPeriod>('monthly');
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const todayStr = '2026-07-04'; // Static reference
-  const currentMonthIdx = 6; // July
-  const currentYear = 2026;
+  // --- Dynamic Calculations based on Current Date ---
+  const todayStr = new Date().toISOString().split('T')[0];
+  const now = new Date();
+  const currentMonthIdx = now.getMonth();
+  const currentYear = now.getFullYear();
 
   // --- Helpers to filter transactions by period ---
   const getPeriodSales = () => {
@@ -249,10 +251,10 @@ export const ReportsView: React.FC = () => {
         doc.text('BUSINESS REPORT', 15, 43);
 
         const periodDescription = period === 'daily' 
-          ? 'Daily Period (04 July 2026)' 
+          ? `Daily Period (${formatDate(todayStr)})` 
           : period === 'weekly' 
-            ? 'Weekly Period (7 Days Ending 04 July 2026)' 
-            : 'Monthly Period (July 2026)';
+            ? `Weekly Period (7 Days Ending ${formatDate(todayStr)})` 
+            : `Monthly Period (${new Date(todayStr).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })})`;
         
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
@@ -570,11 +572,11 @@ export const ReportsView: React.FC = () => {
           </div>
           <div className="text-right">
             <h2 className="text-lg font-bold text-blue-600">KonterIQ Report</h2>
-            <p className="text-xs text-slate-500">Tanggal Cetak: 2026-07-04</p>
+            <p className="text-xs text-slate-500">Tanggal Cetak: {formatDate(todayStr)}</p>
           </div>
         </div>
         <div className="mt-4 text-xs font-semibold py-2 bg-slate-50 border-y border-slate-200 capitalize">
-          Lingkup Laporan: {period === 'daily' ? 'Harian (04 Juli 2026)' : period === 'weekly' ? 'Mingguan (7 Hari Terakhir)' : 'Bulanan (Juli 2026)'}
+          Lingkup Laporan: {period === 'daily' ? `Harian (${formatDate(todayStr)})` : period === 'weekly' ? 'Mingguan (7 Hari Terakhir)' : `Bulanan (${new Date(todayStr).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })})`}
         </div>
       </div>
 

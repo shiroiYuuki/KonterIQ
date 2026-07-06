@@ -49,8 +49,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         {/* Brand Header */}
         <div className="h-20 flex items-center justify-between px-6 border-b border-[#E2E8F0] dark:border-slate-900/60">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-[#2563EB] rounded-lg flex items-center justify-center text-white shadow-sm">
-              <span className="font-bold text-base tracking-tight">IQ</span>
+            <div className="w-8 h-8 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center text-white shadow-md border border-blue-400/20">
+              <Store className="h-4.5 w-4.5 text-white" />
             </div>
             <div>
               <h1 className="font-sans font-extrabold text-xl tracking-tight text-[#0F172A] dark:text-white leading-none">KonterIQ</h1>
